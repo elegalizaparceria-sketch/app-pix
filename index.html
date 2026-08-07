@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Controle PIX</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1F3864">
+<style>
+  :root{--azul:#1F3864;--azul2:#2c4f8f;--verde:#1e9e5a;--vermelho:#d64545;--cinza:#f3f5f8;--texto:#222;}
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Roboto,Arial,sans-serif;}
+  body{background:var(--cinza);color:var(--texto);padding-bottom:80px;}
+  header{background:var(--azul);color:#fff;padding:16px;position:sticky;top:0;z-index:10;box-shadow:0 2px 6px rgba(0,0,0,.2);}
+  header h1{font-size:19px;}
+  header p{font-size:12px;opacity:.85;margin-top:2px;}
+  nav.tabs{display:flex;background:var(--azul);padding:0 8px 10px;gap:6px;}
+  nav.tabs button{flex:1;padding:10px 4px;border:none;border-radius:8px;background:rgba(255,255,255,.12);color:#fff;font-weight:600;font-size:13px;cursor:pointer;}
+  nav.tabs button.ativo{background:#fff;color:var(--azul);}
+  main{max-width:720px;margin:0 auto;padding:14px;}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
+  .card{background:#fff;border-radius:12px;padding:14px 8px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+  .card .rotulo{font-size:10px;color:#777;text-transform:uppercase;letter-spacing:.4px;}
+  .card .valor{font-size:15px;font-weight:700;margin-top:4px;}
+  .verde{color:var(--verde);}.vermelho{color:var(--vermelho);}.azul{color:var(--azul);}
+  .card-banco{background:#fff;border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+  .card-banco h2{font-size:15px;color:var(--azul);margin-bottom:8px;}
+  .card-banco .linhas{display:flex;justify-content:space-between;font-size:13px;padding:2px 0;}
+  .grafico{margin-top:10px;}
+  .barra-linha{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:12px;}
+  .barra-linha .rot{width:72px;color:#666;flex-shrink:0;}
+  .barra{height:18px;border-radius:4px;min-width:2px;}
+  .filtro{display:flex;gap:6px;margin-bottom:10px;}
+  .filtro button{padding:6px 12px;border:1px solid #ccc;border-radius:20px;background:#fff;font-size:12px;cursor:pointer;}
+  .filtro button.ativo{background:var(--azul);color:#fff;border-color:var(--azul);}
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+  th{background:var(--azul);color:#fff;padding:10px 6px;font-size:12px;text-align:center;}
+  td{padding:10px 6px;font-size:13px;text-align:center;border-bottom:1px solid #eee;}
+  tr:last-child td{border-bottom:none;}
+  .pessoa{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .atualizado{text-align:center;color:#888;font-size:12px;margin:10px 0;}
+  .vazio{text-align:center;color:#999;padding:30px 0;font-size:14px;}
+</style>
+</head>
+<body>
+<header>
+  <h1>💰 Controle PIX</h1>
+  <p>Pessoa física · Leonardo · dados atualizados automaticamente</p>
+</header>
+<nav class="tabs">
+  <button data-aba="dashboard" class="ativo">📊 Dashboard</button>
+  <button data-aba="Nubank">🟣 Nubank</button>
+  <button data-aba="XP">🟡 XP</button>
+  <button data-aba="Todas">📋 Todas</button>
+</nav>
+<main id="app"></main>
+
+<script>
+let dados = [];
+let abaAtual = 'dashboard';
+let filtro = 'Todos';
+
+const fmtMoeda = v => (v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const somar = (arr,tipo) => arr.filter(t=>t.tipo===tipo).reduce((s,t)=>s+t.valor,0);
+const filtroOk = t => filtro==='Todos' || t.tipo===filtro;
+
+function htmlFiltros(){
+  return ['Todos','Recebido','Pago'].map(f=>
+    `<button class="${filtro===f?'ativo':''}" onclick="setFiltro('${f}')">${f}</button>`).join('');
+}
+
+function htmlDashboard(){
+  const rec = somar(dados,'Recebido'), pag = somar(dados,'Pago');
+  const max = Math.max(...dados.map(t=>t.valor), 1);
+  let bancos = '';
+  for(const b of ['Nubank','XP']){
+    const arr = dados.filter(t=>t.banco===b);
+    const r = somar(arr,'Recebido'), p = somar(arr,'Pago');
+    bancos += `<div class="card-banco"><h2>${b}</h2>
+      <div class="linhas"><span>Recebido</span><strong class="verde">${fmtMoeda(r)}</strong></div>
+      <div class="linhas"><span>Pago</span><strong class="vermelho">${fmtMoeda(p)}</strong></div>
+      <div class="linhas"><span>Saldo</span><strong class="${r-p>=0?'verde':'vermelho'}">${fmtMoeda(r-p)}</strong></div>
+      <div class="grafico">
+        <div class="barra-linha"><span class="rot">Recebido</span><div class="barra" style="width:${Math.max(2,(r/max)*100)}%;background:var(--verde)"></div></div>
+        <div class="barra-linha"><span class="rot">Pago</span><div class="barra" style="width:${Math.max(2,(p/max)*100)}%;background:var(--vermelho)"></div></div>
+      </div></div>`;
+  }
+  return `<div class="cards">
+    <div class="card"><div class="rotulo">Recebido</div><div class="valor verde">${fmtMoeda(rec)}</div></div>
+    <div class="card"><div class="rotulo">Pago</div><div class="valor vermelho">${fmtMoeda(pag)}</div></div>
+    <div class="card"><div class="rotulo">Saldo Líquido</div><div class="valor azul">${fmtMoeda(rec-pag)}</div></div>
+  </div>${bancos}`;
+}
+
+function htmlTabela(arr, titulo){
+  const temBanco = titulo==='Todas';
+  const cab = `<tr><th>Data</th><th>Horário</th>${temBanco?'<th>Banco</th>':''}<th>Tipo</th><th>Valor</th><th>Pessoa</th></tr>`;
+  const linhas = arr.map(t=>`<tr>
+    <td>${t.data}</td><td>${t.hora}</td>
+    ${temBanco?`<td>${t.banco}</td>`:''}
+    <td class="${t.tipo==='Recebido'?'verde':'vermelho'}">${t.tipo}</td>
+    <td>${fmtMoeda(t.valor)}</td>
+    <td class="pessoa" title="${esc(t.pessoa)}">${esc(t.pessoa)||'—'}</td></tr>`).join('');
+  if(!arr.length) return `<div class="filtro">${htmlFiltros()}</div><div class="vazio">Nenhuma transação.</div>`;
+  return `<div class="filtro">${htmlFiltros()}</div>
+    <table><thead>${cab}</thead><tbody>${linhas}</tbody></table>`;
+}
+
+function render(){
+  const app = document.getElementById('app');
+  if(abaAtual==='dashboard') app.innerHTML = htmlDashboard();
+  else if(abaAtual==='Todas') app.innerHTML = htmlTabela(dados.filter(filtroOk), 'Todas');
+  else app.innerHTML = htmlTabela(dados.filter(t=>t.banco===abaAtual && filtroOk(t)), abaAtual);
+}
+
+document.querySelectorAll('nav.tabs button').forEach(b=>{
+  b.onclick = ()=>{ abaAtual = b.dataset.aba; filtro='Todos';
+    document.querySelectorAll('nav.tabs button').forEach(x=>x.classList.toggle('ativo',x===b));
+    render(); };
+});
+function setFiltro(f){ filtro=f; render(); }
+
+// Busca os dados do servidor automaticamente ao abrir
+async function carregarDados(){
+  try{
+    const resp = await fetch('dados_pix.json', {cache:'no-store'});
+    if(!resp.ok) throw new Error('HTTP '+resp.status);
+    const arr = await resp.json();
+    if(Array.isArray(arr) && arr.length){ dados = arr; }
+  }catch(e){
+    // Se falhar, tenta o cache local
+    try{ const s = localStorage.getItem('dados_pix'); if(s){ dados = JSON.parse(s); } }catch(_){}
+  }
+  render();
+}
+
+// Registra o service worker (offline)
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=> navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+
+carregarDados();
+</script>
+</body>
+</html>
