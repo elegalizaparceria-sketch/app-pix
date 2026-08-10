@@ -40,6 +40,19 @@
   .barra-linha{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:12px;}
   .barra-linha .rot{width:72px;color:#666;flex-shrink:0;}
   .barra{height:18px;border-radius:4px;min-width:2px;}
+  /* ===== MINI GRÁFICO ===== */
+  .mini-grafico{background:#fff;border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+  .mini-grafico h2{font-size:15px;color:var(--azul);margin-bottom:10px;}
+  .mg-legend{display:flex;gap:14px;font-size:12px;color:#666;margin-bottom:10px;}
+  .mg-legend span{display:flex;align-items:center;gap:5px;}
+  .mg-dot{width:10px;height:10px;border-radius:3px;display:inline-block;}
+  .mg-bars{display:flex;align-items:flex-end;gap:8px;height:130px;padding:0 4px;}
+  .mg-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end;}
+  .mg-pair{display:flex;align-items:flex-end;gap:3px;height:100%;width:100%;justify-content:center;}
+  .mg-bar{width:14px;border-radius:3px 3px 0 0;min-height:2px;transition:height .3s;}
+  .mg-bar.rec{background:var(--verde);}
+  .mg-bar.pag{background:var(--vermelho);}
+  .mg-label{font-size:10px;color:#888;white-space:nowrap;}
   /* ===== RELATÓRIOS ===== */
   .relatorio{background:#fff;border-radius:12px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,.08);}
   .periodo-toggle{display:flex;gap:6px;margin-bottom:12px;}
@@ -112,6 +125,39 @@ function htmlFiltros(){
   return ['Todos','Recebido','Pago'].map(f=>
     `<button class="${filtro===f?'ativo':''}" onclick="setFiltro('${f}')">${f}</button>`).join('');
 }
+/* ===== MINI GRÁFICO: Recebido vs Pago por mês ===== */
+function htmlMiniGrafico(){
+  if(!dados.length) return '';
+  const porMes = {};
+  dados.forEach(t=>{
+    const m = t.mes_ano;
+    if(!porMes[m]) porMes[m] = {rec:0, pag:0};
+    porMes[m][t.tipo==='Recebido'?'rec':'pag'] += t.valor;
+  });
+  const meses = Object.keys(porMes).sort();
+  const max = Math.max(...meses.map(m=>Math.max(porMes[m].rec, porMes[m].pag)), 1);
+  const cols = meses.map(m=>{
+    const r = porMes[m].rec, p = porMes[m].pag;
+    const hR = Math.max(2,(r/max)*100), hP = Math.max(2,(p/max)*100);
+    const [mm,aa] = m.split('/');
+    const rotulo = MESES_NOME[parseInt(mm)-1].slice(0,3);
+    return `<div class="mg-col">
+      <div class="mg-pair">
+        <div class="mg-bar rec" style="height:${hR}%" title="${fmtMoeda(r)}"></div>
+        <div class="mg-bar pag" style="height:${hP}%" title="${fmtMoeda(p)}"></div>
+      </div>
+      <div class="mg-label">${rotulo}</div>
+    </div>`;
+  }).join('');
+  return `<div class="mini-grafico">
+    <h2>📊 Recebido vs Pago por mês</h2>
+    <div class="mg-legend">
+      <span><span class="mg-dot" style="background:var(--verde)"></span> Recebido</span>
+      <span><span class="mg-dot" style="background:var(--vermelho)"></span> Pago</span>
+    </div>
+    <div class="mg-bars">${cols}</div>
+  </div>`;
+}
 function htmlDashboard(){
   const rec = somar(dados,'Recebido'), pag = somar(dados,'Pago');
   const max = Math.max(...dados.map(t=>t.valor), 1);
@@ -132,7 +178,7 @@ function htmlDashboard(){
     <div class="card"><div class="rotulo">Recebido</div><div class="valor verde">${fmtValor(rec)}</div></div>
     <div class="card"><div class="rotulo">Pago</div><div class="valor vermelho">${fmtValor(pag)}</div></div>
     <div class="card"><div class="rotulo">Saldo Líquido</div><div class="valor azul">${fmtValor(rec-pag)}</div></div>
-  </div>${bancos}`;
+  </div>${htmlMiniGrafico()}${bancos}`;
 }
 function htmlTabela(arr, titulo, comBanco){
   const cab = `<tr><th>Data</th><th>Horário</th>${comBanco?'<th>Banco</th>':''}<th>Tipo</th><th>Valor</th><th>Pessoa</th></tr>`;
