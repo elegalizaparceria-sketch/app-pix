@@ -11,6 +11,12 @@
   *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Roboto,Arial,sans-serif;}
   html,body{margin:0;padding:0;background:var(--azul);color:var(--texto);min-height:100%;}
   body{padding-bottom:80px;}
+  /* ===== SPLASH SCREEN ===== */
+  #splash{position:fixed;inset:0;background:var(--azul);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .4s;}
+  #splash img{width:120px;height:120px;border-radius:24px;box-shadow:0 4px 20px rgba(0,0,0,.3);}
+  #splash p{color:#fff;margin-top:16px;font-size:15px;font-weight:600;letter-spacing:.5px;}
+  #splash.oculto{opacity:0;pointer-events:none;}
+  /* ===== FIM SPLASH ===== */
   header{background:var(--azul);color:#fff;padding:16px;position:sticky;top:0;z-index:10;box-shadow:0 2px 6px rgba(0,0,0,.2);}
   header h1{font-size:19px;}
   header p{font-size:12px;opacity:.85;margin-top:2px;}
@@ -43,6 +49,11 @@
 </style>
 </head>
 <body>
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <img src="icon-512.png" alt="Controle PIX">
+  <p>Controle PIX</p>
+</div>
 <header>
   <h1>💰 Controle PIX</h1>
   <p>Pessoa física · Leonardo · dados atualizados automaticamente</p>
@@ -113,7 +124,6 @@ document.querySelectorAll('nav.tabs button').forEach(b=>{
     render(); };
 });
 function setFiltro(f){ filtro=f; render(); }
-// Busca os dados do servidor automaticamente ao abrir
 async function carregarDados(){
   try{
     const resp = await fetch('dados_pix.json', {cache:'no-store'});
@@ -121,12 +131,12 @@ async function carregarDados(){
     const arr = await resp.json();
     if(Array.isArray(arr) && arr.length){ dados = arr; }
   }catch(e){
-    // Se falhar, tenta o cache local
     try{ const s = localStorage.getItem('dados_pix'); if(s){ dados = JSON.parse(s); } }catch(_){}
   }
   render();
+  // Esconde a splash depois que os dados carregam
+  setTimeout(()=>{ const sp = document.getElementById('splash'); if(sp) sp.classList.add('oculto'); }, 400);
 }
-// Registra o service worker (offline)
 if('serviceWorker' in navigator){
   window.addEventListener('load', ()=> navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 }
