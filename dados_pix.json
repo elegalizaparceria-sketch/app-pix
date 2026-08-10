@@ -1,5 +1,181 @@
 [
   {
+    "data": "05/08/2026",
+    "hora": "16:16",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Pago",
+    "valor": 10.0,
+    "pessoa": "Transferência entre contas"
+  },
+  {
+    "data": "05/08/2026",
+    "hora": "16:21",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Recebido",
+    "valor": 8.0,
+    "pessoa": ""
+  },
+  {
+    "data": "05/08/2026",
+    "hora": "17:15",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Recebido",
+    "valor": 170.0,
+    "pessoa": ""
+  },
+  {
+    "data": "05/08/2026",
+    "hora": "17:42",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Recebido",
+    "valor": 544.68,
+    "pessoa": "QUEZIA PRINCE DE ANDRADE"
+  },
+  {
+    "data": "05/08/2026",
+    "hora": "20:16",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Pago",
+    "valor": 20.0,
+    "pessoa": "PIXPAY SERVICOS E TECNOLOGIA LTDA"
+  },
+  {
+    "data": "06/08/2026",
+    "hora": "07:49",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Pago",
+    "valor": 30.0,
+    "pessoa": "OXLAINE CRISTINA DOS SANTOS RODRIGUES"
+  },
+  {
+    "data": "06/08/2026",
+    "hora": "09:23",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Recebido",
+    "valor": 7.74,
+    "pessoa": "ALINE ANANDA ALVES"
+  },
+  {
+    "data": "06/08/2026",
+    "hora": "18:02",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Pago",
+    "valor": 11.25,
+    "pessoa": "REGIELLY ALVES EVANGELISTA OLIVEIRA"
+  },
+  {
+    "data": "06/08/2026",
+    "hora": "18:36",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Recebido",
+    "valor": 588.55,
+    "pessoa": ""
+  },
+  {
+    "data": "07/08/2026",
+    "hora": "08:04",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Recebido",
+    "valor": 22.0,
+    "pessoa": ""
+  },
+  {
+    "data": "07/08/2026",
+    "hora": "10:15",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Recebido",
+    "valor": 160.0,
+    "pessoa": "Fga Distribuidora E Servicos Ltda"
+  },
+  {
+    "data": "07/08/2026",
+    "hora": "11:06",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Recebido",
+    "valor": 360.0,
+    "pessoa": ""
+  },
+  {
+    "data": "07/08/2026",
+    "hora": "11:08",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Pago",
+    "valor": 61.75,
+    "pessoa": "ULTRACERT CERTIFICACAO DIGITAL LTDA"
+  },
+  {
+    "data": "07/08/2026",
+    "hora": "11:09",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Pago",
+    "valor": 61.75,
+    "pessoa": "Transferência entre contas"
+  },
+  {
+    "data": "07/08/2026",
+    "hora": "11:11",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Pago",
+    "valor": 61.75,
+    "pessoa": "ULTRACERT CERTIFICACAO DIGITAL LTDA"
+  },
+  {
+    "data": "07/08/2026",
+    "hora": "11:18",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Pago",
+    "valor": 37.0,
+    "pessoa": "sua conta no MERCADO PAGO IP LTDA"
+  },
+  {
     "data": "07/08/2026",
     "hora": "21:19",
     "mes": "08",
@@ -119,5 +295,82 @@
     "tipo": "Pago",
     "valor": 48.4,
     "pessoa": "PAGALEVE INSTITUICAO DE PAGAMENTO LTDA"
+  },
+  {
+    "data": "01/08/2026",
+    "hora": "15:32",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "XP",
+    "tipo": "Pago",
+    "valor": 9.87,
+    "pessoa": "Leonardo de Oliveira Pereira"
+  },
+  {
+    "data": "05/08/2026",
+    "hora": "16:16",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "XP",
+    "tipo": "Recebido",
+    "valor": 10.0,
+    "pessoa": ""
+  },
+  {
+    "data": "05/08/2026",
+    "hora": "16:21",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "XP",
+    "tipo": "Pago",
+    "valor": 8.0,
+    "pessoa": "Leonardo de Oliveira Pereira"
+  },
+  {
+    "data": "06/08/2026",
+    "hora": "15:55",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "XP",
+    "tipo": "Recebido",
+    "valor": 586.55,
+    "pessoa": ""
+  },
+  {
+    "data": "06/08/2026",
+    "hora": "18:36",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "XP",
+    "tipo": "Pago",
+    "valor": 588.55,
+    "pessoa": "Leonardo de Oliveira Pereira"
+  },
+  {
+    "data": "07/08/2026",
+    "hora": "11:09",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "XP",
+    "tipo": "Recebido",
+    "valor": 61.75,
+    "pessoa": ""
+  },
+  {
+    "data": "07/08/2026",
+    "hora": "11:10",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "XP",
+    "tipo": "Pago",
+    "valor": 61.75,
+    "pessoa": "ULTRACERT CERTIFICACAO DIGITAL LTDA"
   }
 ]
