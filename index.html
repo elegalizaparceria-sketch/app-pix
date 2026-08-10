@@ -23,9 +23,9 @@
   header p{font-size:12px;opacity:.85;margin-top:2px;}
   #btnOlho{background:rgba(255,255,255,.15);border:none;border-radius:50%;width:44px;height:44px;font-size:22px;cursor:pointer;color:#fff;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
   #btnOlho:active{transform:scale(.92);}
-  /* ===== TABS ===== */
-  nav.tabs{display:flex;background:var(--azul);padding:0 8px 10px;gap:6px;overflow-x:auto;}
-  nav.tabs button{flex:1;min-width:72px;padding:10px 4px;border:none;border-radius:8px;background:rgba(255,255,255,.12);color:#fff;font-weight:600;font-size:13px;cursor:pointer;white-space:nowrap;}
+  /* ===== TABS (MAIORES) ===== */
+  nav.tabs{display:flex;background:var(--azul);padding:0 8px 12px;gap:8px;overflow-x:auto;}
+  nav.tabs button{flex:1;min-width:100px;padding:15px 6px;border:none;border-radius:10px;background:rgba(255,255,255,.12);color:#fff;font-weight:700;font-size:15px;cursor:pointer;white-space:nowrap;}
   nav.tabs button.ativo{background:#fff;color:var(--azul);}
   main{max-width:720px;margin:0 auto;padding:14px;}
   .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
@@ -33,6 +33,27 @@
   .card .rotulo{font-size:10px;color:#777;text-transform:uppercase;letter-spacing:.4px;}
   .card .valor{font-size:15px;font-weight:700;margin-top:4px;}
   .verde{color:var(--verde);}.vermelho{color:var(--vermelho);}.azul{color:var(--azul);}
+  /* ===== GRÁFICOS LADO A LADO ===== */
+  .graficos-linha{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+  .graf-card{background:#fff;border-radius:12px;padding:12px;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+  .graf-card h3{font-size:13px;color:var(--azul);margin-bottom:8px;}
+  .mg-legend{display:flex;gap:12px;font-size:11px;color:#666;margin-bottom:8px;flex-wrap:wrap;}
+  .mg-legend span{display:flex;align-items:center;gap:4px;}
+  .mg-dot{width:10px;height:10px;border-radius:3px;display:inline-block;}
+  .mg-bars{display:flex;align-items:flex-end;gap:5px;height:110px;padding:0 2px;}
+  .mg-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:100%;justify-content:flex-end;}
+  .mg-pair{display:flex;align-items:flex-end;gap:2px;height:100%;width:100%;justify-content:center;}
+  .mg-bar{width:11px;border-radius:3px 3px 0 0;min-height:2px;transition:height .3s;}
+  .mg-bar.rec{background:var(--verde);}
+  .mg-bar.pag{background:var(--vermelho);}
+  .mg-label{font-size:9px;color:#888;white-space:nowrap;}
+  /* ===== PIZZA ===== */
+  .pizza-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;}
+  .pizza{width:110px;height:110px;border-radius:50%;position:relative;box-shadow:inset 0 0 0 1px rgba(0,0,0,.05);}
+  .pizza-centro{position:absolute;inset:26px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--azul);}
+  .pizza-legend{width:100%;font-size:11px;color:#666;}
+  .pizza-legend .lin{display:flex;justify-content:space-between;padding:2px 0;}
+  /* ===== CARD BANCO ===== */
   .card-banco{background:#fff;border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.08);}
   .card-banco h2{font-size:15px;color:var(--azul);margin-bottom:8px;}
   .card-banco .linhas{display:flex;justify-content:space-between;font-size:13px;padding:2px 0;}
@@ -40,26 +61,21 @@
   .barra-linha{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:12px;}
   .barra-linha .rot{width:72px;color:#666;flex-shrink:0;}
   .barra{height:18px;border-radius:4px;min-width:2px;}
-  /* ===== MINI GRÁFICO POR BANCO ===== */
-  .mg-legend{display:flex;gap:14px;font-size:11px;color:#666;margin:10px 0 6px;}
-  .mg-legend span{display:flex;align-items:center;gap:5px;}
-  .mg-dot{width:10px;height:10px;border-radius:3px;display:inline-block;}
-  .mg-bars{display:flex;align-items:flex-end;gap:6px;height:90px;padding:0 2px;}
-  .mg-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:100%;justify-content:flex-end;}
-  .mg-pair{display:flex;align-items:flex-end;gap:3px;height:100%;width:100%;justify-content:center;}
-  .mg-bar{width:12px;border-radius:3px 3px 0 0;min-height:2px;transition:height .3s;}
-  .mg-bar.rec{background:var(--verde);}
-  .mg-bar.pag{background:var(--vermelho);}
-  .mg-label{font-size:9px;color:#888;white-space:nowrap;}
   /* ===== RELATÓRIOS ===== */
   .relatorio{background:#fff;border-radius:12px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,.08);}
   .periodo-toggle{display:flex;gap:6px;margin-bottom:12px;}
-  .periodo-toggle button{flex:1;padding:10px 4px;border:none;border-radius:8px;background:#eef1f6;color:var(--azul);font-weight:600;font-size:13px;cursor:pointer;}
+  .periodo-toggle button{flex:1;padding:11px 4px;border:none;border-radius:8px;background:#eef1f6;color:var(--azul);font-weight:600;font-size:14px;cursor:pointer;}
   .periodo-toggle button.ativo{background:var(--azul);color:#fff;}
   .filtro{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
-  .filtro select{flex:1;min-width:110px;padding:9px 8px;border:1px solid #ccc;border-radius:8px;background:#fff;font-size:13px;color:var(--texto);}
-  .filtro button{padding:6px 12px;border:1px solid #ccc;border-radius:20px;background:#fff;font-size:12px;cursor:pointer;}
+  .filtro select{flex:1;min-width:110px;padding:10px 8px;border:1px solid #ccc;border-radius:8px;background:#fff;font-size:13px;color:var(--texto);}
+  .filtro button{padding:7px 12px;border:1px solid #ccc;border-radius:20px;background:#fff;font-size:12px;cursor:pointer;}
   .filtro button.ativo{background:var(--azul);color:#fff;border-color:var(--azul);}
+  /* ===== BOTÕES EXPORTAR ===== */
+  .exportar{display:flex;gap:8px;margin-bottom:12px;}
+  .exportar button{flex:1;padding:12px 8px;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;color:#fff;}
+  .btn-pdf{background:#d64545;}
+  .btn-xls{background:#1e9e5a;}
+  .exportar button:active{transform:scale(.96);}
   table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08);}
   th{background:var(--azul);color:#fff;padding:10px 6px;font-size:12px;text-align:center;}
   td{padding:10px 6px;font-size:13px;text-align:center;border-bottom:1px solid #eee;}
@@ -67,6 +83,13 @@
   .pessoa{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   .atualizado{text-align:center;color:#888;font-size:12px;margin:10px 0;}
   .vazio{text-align:center;color:#999;padding:30px 0;font-size:14px;}
+  /* ===== IMPRESSÃO (PDF) ===== */
+  @media print{
+    body{background:#fff;}
+    header,nav.tabs,#splash,#btnOlho,.no-print{display:none!important;}
+    main{max-width:100%;padding:0;}
+    .card,.card-banco,.relatorio,.graf-card,table{box-shadow:none;border:1px solid #ccc;}
+  }
 </style>
 </head>
 <body>
@@ -123,11 +146,11 @@ function htmlFiltros(){
   return ['Todos','Recebido','Pago'].map(f=>
     `<button class="${filtro===f?'ativo':''}" onclick="setFiltro('${f}')">${f}</button>`).join('');
 }
-/* ===== MINI GRÁFICO de um banco (Recebido vs Pago por mês) ===== */
-function htmlMiniGraficoBanco(arrBanco){
-  if(!arrBanco.length) return '';
+/* ===== GRÁFICO DE BARRAS POR MÊS ===== */
+function htmlBarras(arr){
+  if(!arr.length) return '<div class="vazio">Sem dados.</div>';
   const porMes = {};
-  arrBanco.forEach(t=>{
+  arr.forEach(t=>{
     const m = t.mes_ano;
     if(!porMes[m]) porMes[m] = {rec:0, pag:0};
     porMes[m][t.tipo==='Recebido'?'rec':'pag'] += t.valor;
@@ -138,13 +161,12 @@ function htmlMiniGraficoBanco(arrBanco){
     const r = porMes[m].rec, p = porMes[m].pag;
     const hR = Math.max(2,(r/max)*100), hP = Math.max(2,(p/max)*100);
     const [mm] = m.split('/');
-    const rotulo = MESES_NOME[parseInt(mm)-1].slice(0,3);
     return `<div class="mg-col">
       <div class="mg-pair">
         <div class="mg-bar rec" style="height:${hR}%" title="${fmtMoeda(r)}"></div>
         <div class="mg-bar pag" style="height:${hP}%" title="${fmtMoeda(p)}"></div>
       </div>
-      <div class="mg-label">${rotulo}</div>
+      <div class="mg-label">${MESES_NOME[parseInt(mm)-1].slice(0,3)}</div>
     </div>`;
   }).join('');
   return `<div class="mg-legend">
@@ -152,6 +174,23 @@ function htmlMiniGraficoBanco(arrBanco){
       <span><span class="mg-dot" style="background:var(--vermelho)"></span> Pago</span>
     </div>
     <div class="mg-bars">${cols}</div>`;
+}
+/* ===== GRÁFICO DE PIZZA ===== */
+function htmlPizza(arr){
+  const rec = somar(arr,'Recebido'), pag = somar(arr,'Pago');
+  const total = rec + pag;
+  if(!total) return '<div class="vazio">Sem dados.</div>';
+  const pR = (rec/total)*100, pP = (pag/total)*100;
+  const grad = `conic-gradient(var(--verde) 0 ${pR}%, var(--vermelho) ${pR}% 100%)`;
+  return `<div class="pizza-wrap">
+    <div class="pizza" style="background:${grad}">
+      <div class="pizza-centro">${Math.round(pR)}%</div>
+    </div>
+    <div class="pizza-legend">
+      <div class="lin"><span><span class="mg-dot" style="background:var(--verde)"></span> Recebido</span><strong>${fmtValor(rec)}</strong></div>
+      <div class="lin"><span><span class="mg-dot" style="background:var(--vermelho)"></span> Pago</span><strong>${fmtValor(pag)}</strong></div>
+    </div>
+  </div>`;
 }
 function htmlDashboard(){
   const rec = somar(dados,'Recebido'), pag = somar(dados,'Pago');
@@ -167,15 +206,18 @@ function htmlDashboard(){
       <div class="grafico">
         <div class="barra-linha"><span class="rot">Recebido</span><div class="barra" style="width:${Math.max(2,(r/max)*100)}%;background:var(--verde)"></div></div>
         <div class="barra-linha"><span class="rot">Pago</span><div class="barra" style="width:${Math.max(2,(p/max)*100)}%;background:var(--vermelho)"></div></div>
-      </div>
-      ${htmlMiniGraficoBanco(arr)}
-    </div>`;
+      </div></div>`;
   }
   return `<div class="cards">
     <div class="card"><div class="rotulo">Recebido</div><div class="valor verde">${fmtValor(rec)}</div></div>
     <div class="card"><div class="rotulo">Pago</div><div class="valor vermelho">${fmtValor(pag)}</div></div>
     <div class="card"><div class="rotulo">Saldo Líquido</div><div class="valor azul">${fmtValor(rec-pag)}</div></div>
-  </div>${bancos}`;
+  </div>
+  <div class="graficos-linha">
+    <div class="graf-card"><h3>📊 Recebido vs Pago (mensal)</h3>${htmlBarras(dados)}</div>
+    <div class="graf-card"><h3>🥧 Distribuição total</h3>${htmlPizza(dados)}</div>
+  </div>
+  ${bancos}`;
 }
 function htmlTabela(arr, titulo, comBanco){
   const cab = `<tr><th>Data</th><th>Horário</th>${comBanco?'<th>Banco</th>':''}<th>Tipo</th><th>Valor</th><th>Pessoa</th></tr>`;
@@ -196,18 +238,22 @@ function listaAnos(){
   const set = new Set(dados.map(t=>t.ano).filter(Boolean));
   return [...set].sort();
 }
-function htmlRelatorio(){
-  if(!dados.length) return `<div class="relatorio"><div class="vazio">Nenhuma transação.</div></div>`;
+function dadosRelatorio(){
   if(!relMes) relMes = listaMeses().pop();
   if(!relAno) relAno = listaAnos().pop();
-  const arr = dados.filter(t=>{
+  return dados.filter(t=>{
     if(relPeriodo==='mensal' && t.mes_ano!==relMes) return false;
     if(relPeriodo==='anual' && t.ano!==relAno) return false;
     if(relBanco!=='Todos' && t.banco!==relBanco) return false;
     if(relTipo!=='Todos' && t.tipo!==relTipo) return false;
     return true;
   });
+}
+function htmlRelatorio(){
+  if(!dados.length) return `<div class="relatorio"><div class="vazio">Nenhuma transação.</div></div>`;
+  const arr = dadosRelatorio();
   const rec = somar(arr,'Recebido'), pag = somar(arr,'Pago');
+  const tituloPeriodo = relPeriodo==='mensal' ? nomeMes(relMes) : 'Ano '+relAno;
   const opcoesPeriodo = relPeriodo==='mensal'
     ? listaMeses().map(m=>`<option value="${m}" ${m===relMes?'selected':''}>${nomeMes(m)}</option>`).join('')
     : listaAnos().map(a=>`<option value="${a}" ${a===relAno?'selected':''}>${a}</option>`).join('');
@@ -229,13 +275,37 @@ function htmlRelatorio(){
         <option value="Pago" ${relTipo==='Pago'?'selected':''}>Pago</option>
       </select>
     </div>
+    <div class="exportar no-print">
+      <button class="btn-pdf" onclick="exportarPDF()">📄 Exportar PDF</button>
+      <button class="btn-xls" onclick="exportarExcel()">📊 Exportar Excel</button>
+    </div>
     <div class="cards">
       <div class="card"><div class="rotulo">Recebido</div><div class="valor verde">${fmtValor(rec)}</div></div>
       <div class="card"><div class="rotulo">Pago</div><div class="valor vermelho">${fmtValor(pag)}</div></div>
       <div class="card"><div class="rotulo">Saldo</div><div class="valor ${rec-pag>=0?'verde':'vermelho'}">${fmtValor(rec-pag)}</div></div>
     </div>
+    <h3 style="font-size:14px;color:var(--azul);margin:10px 0 8px;">Transações — ${tituloPeriodo}</h3>
     ${htmlTabela(arr,'Relatório',true)}
   </div>`;
+}
+/* ===== EXPORTAÇÕES ===== */
+function exportarPDF(){
+  window.print();
+}
+function exportarExcel(){
+  const arr = dadosRelatorio();
+  const linhas = [['Data','Horário','Banco','Tipo','Valor','Pessoa']];
+  arr.forEach(t=>{
+    linhas.push([t.data, t.hora, t.banco, t.tipo, String(t.valor).replace('.',','), t.pessoa||'']);
+  });
+  const csv = '\uFEFF' + linhas.map(r=>r.join(';')).join('\r\n');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const a = document.createElement('a');
+  const suf = relPeriodo==='mensal' ? relMes.replace('/','_') : relAno;
+  a.href = URL.createObjectURL(blob);
+  a.download = 'relatorio_pix_' + suf + '.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
 }
 function setPeriodo(p){
   relPeriodo = p;
