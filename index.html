@@ -9,7 +9,8 @@
 <style>
   :root{--azul:#1F3864;--azul2:#2c4f8f;--verde:#1e9e5a;--vermelho:#d64545;--cinza:#f3f5f8;--texto:#222;}
   *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Roboto,Arial,sans-serif;}
-  body{background:var(--cinza);color:var(--texto);padding-bottom:80px;}
+  html,body{margin:0;padding:0;background:var(--azul);color:var(--texto);min-height:100%;}
+  body{padding-bottom:80px;}
   header{background:var(--azul);color:#fff;padding:16px;position:sticky;top:0;z-index:10;box-shadow:0 2px 6px rgba(0,0,0,.2);}
   header h1{font-size:19px;}
   header p{font-size:12px;opacity:.85;margin-top:2px;}
@@ -53,22 +54,18 @@
   <button data-aba="Todas">📋 Todas</button>
 </nav>
 <main id="app"></main>
-
 <script>
 let dados = [];
 let abaAtual = 'dashboard';
 let filtro = 'Todos';
-
 const fmtMoeda = v => (v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const somar = (arr,tipo) => arr.filter(t=>t.tipo===tipo).reduce((s,t)=>s+t.valor,0);
 const filtroOk = t => filtro==='Todos' || t.tipo===filtro;
-
 function htmlFiltros(){
   return ['Todos','Recebido','Pago'].map(f=>
     `<button class="${filtro===f?'ativo':''}" onclick="setFiltro('${f}')">${f}</button>`).join('');
 }
-
 function htmlDashboard(){
   const rec = somar(dados,'Recebido'), pag = somar(dados,'Pago');
   const max = Math.max(...dados.map(t=>t.valor), 1);
@@ -91,7 +88,6 @@ function htmlDashboard(){
     <div class="card"><div class="rotulo">Saldo Líquido</div><div class="valor azul">${fmtMoeda(rec-pag)}</div></div>
   </div>${bancos}`;
 }
-
 function htmlTabela(arr, titulo){
   const temBanco = titulo==='Todas';
   const cab = `<tr><th>Data</th><th>Horário</th>${temBanco?'<th>Banco</th>':''}<th>Tipo</th><th>Valor</th><th>Pessoa</th></tr>`;
@@ -105,21 +101,18 @@ function htmlTabela(arr, titulo){
   return `<div class="filtro">${htmlFiltros()}</div>
     <table><thead>${cab}</thead><tbody>${linhas}</tbody></table>`;
 }
-
 function render(){
   const app = document.getElementById('app');
   if(abaAtual==='dashboard') app.innerHTML = htmlDashboard();
   else if(abaAtual==='Todas') app.innerHTML = htmlTabela(dados.filter(filtroOk), 'Todas');
   else app.innerHTML = htmlTabela(dados.filter(t=>t.banco===abaAtual && filtroOk(t)), abaAtual);
 }
-
 document.querySelectorAll('nav.tabs button').forEach(b=>{
   b.onclick = ()=>{ abaAtual = b.dataset.aba; filtro='Todos';
     document.querySelectorAll('nav.tabs button').forEach(x=>x.classList.toggle('ativo',x===b));
     render(); };
 });
 function setFiltro(f){ filtro=f; render(); }
-
 // Busca os dados do servidor automaticamente ao abrir
 async function carregarDados(){
   try{
@@ -133,12 +126,10 @@ async function carregarDados(){
   }
   render();
 }
-
 // Registra o service worker (offline)
 if('serviceWorker' in navigator){
   window.addEventListener('load', ()=> navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 }
-
 carregarDados();
 </script>
 </body>
