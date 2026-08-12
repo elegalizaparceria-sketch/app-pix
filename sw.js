@@ -1,5 +1,5 @@
-const CACHE = 'controle-pix-v1';
-const CACHEARQUIVOS = ['./index.html', './dados_pix.json'];
+const CACHE = 'controle-pix-v2';
+const CACHEARQUIVOS = ['./index.html'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(CACHEARQUIVOS)));
@@ -17,11 +17,18 @@ self.addEventListener('activate', (e) => {
 
 self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
-  // NÃO cacheia o manifest.json nem o index.html — sempre busca a versão nova
-  if (url.pathname.endsWith('manifest.json') || url.pathname.endsWith('index.html')) {
+  const nome = url.pathname.split('/').pop();
+  // Dados e manifest SEMPRE vêm da internet — nunca do cache
+  if (nome === 'dados_pix.json' || nome === 'manifest.json') {
     return;
   }
   e.respondWith(
-    caches.match(e.request).then((r) => r || fetch(e.request))
+    fetch(e.request)
+      .then((resp) => {
+        const copia = resp.clone();
+        caches.open(CACHE).then((c) => c.put(e.request, copia)).catch(() => {});
+        return resp;
+      })
+      .catch(() => caches.match(e.request))
   );
 });
