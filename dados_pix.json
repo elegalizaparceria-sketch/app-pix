@@ -372,5 +372,82 @@
     "tipo": "Pago",
     "valor": 48.4,
     "pessoa": "PAGALEVE INSTITUICAO DE PAGAMENTO LTDA"
+  },
+  {
+    "data": "10/08/2026",
+    "hora": "18:25",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Recebido",
+    "valor": 5.35,
+    "pessoa": "QUEZIA PRINCE DE ANDRADE"
+  },
+  {
+    "data": "10/08/2026",
+    "hora": "18:27",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Pago",
+    "valor": 8.0,
+    "pessoa": "LUCKY GAMING LTDA foi concluída com"
+  },
+  {
+    "data": "10/08/2026",
+    "hora": "18:39",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Recebido",
+    "valor": 100.0,
+    "pessoa": "LUCKY GAMING LTDA"
+  },
+  {
+    "data": "11/08/2026",
+    "hora": "10:28",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Recebido",
+    "valor": 175.0,
+    "pessoa": "Marcos Niedson Ramos Da Silva Junior"
+  },
+  {
+    "data": "11/08/2026",
+    "hora": "10:47",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Pago",
+    "valor": 100.0,
+    "pessoa": "ULTRACERT CERTIFICACAO DIGITAL LTDA foi concluída"
+  },
+  {
+    "data": "12/08/2026",
+    "hora": "15:25",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Recebido",
+    "valor": 100.0,
+    "pessoa": "Clesio Borges de Carvalho"
+  },
+  {
+    "data": "12/08/2026",
+    "hora": "15:38",
+    "mes": "08",
+    "ano": "2026",
+    "mes_ano": "08/2026",
+    "banco": "Nubank",
+    "tipo": "Pago",
+    "valor": 61.75,
+    "pessoa": "ULTRACERT CERTIFICACAO DIGITAL LTDA foi concluída"
   }
 ]
